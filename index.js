@@ -421,6 +421,7 @@ botonLimpiar.addEventListener('click', function()
         {
             tbody.innerHTML = '';
             sumarItems();
+            limpiarDatos();
         }
         else
         {
@@ -584,7 +585,7 @@ function crearPDF()
             
             html2pdf().set(opt).from(element).save().then(function()
             {
-                ocultarColumna('block', 'none');
+                ocultarColumna('block', 'none');                
                 codigo.focus();
             });
         }
