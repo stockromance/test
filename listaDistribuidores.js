@@ -1,0 +1,20 @@
+const listaDistribuidores = [
+    'claudia perez cobo',
+    'constanza oliva villagran',
+    'debora sanhueza yesca',
+    'elizabeth sanhueza cid',
+    'juan fernandez diaz',
+    'katherine sanhueza cid',
+    'lidia lepiqueo orellana',
+    'marcela pinchuleo concha',
+    'maria f. cornejo ibarra',
+    'maryori albornoz matamala',
+    'monica oliva quiroga',
+    'nayareth sanhueza valdez',
+    'paula jofre duran',
+    'priscila saez donoso',
+    'valentina cancino maldonado',
+    'violeta poblete soto',
+    'viviana soto oliva',
+    'yocelin sanhueza sanhueza'
+];
