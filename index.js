@@ -1,35 +1,41 @@
 // INFO
-const boxError = document.querySelector('#boxError');
-const tipoInforme = document.querySelector('#tipoInforme');
+const boxError = document.querySelector('#box-error');
+const tipoInforme = document.querySelector('#tipo-informe');
 const semana = document.querySelector('#semana');
 const distribuidor = document.querySelector('#distribuidor');
+// ESTADO ITEM
+const estadoBueno = document.querySelector('#estado-bueno');
+const estadoDefecto = document.querySelector('#estado-defecto');
+const boxDefecto = document.querySelector('#box-defecto');
+const tipoDefecto = document.querySelector('#tipo-defecto');
 // ITEM
 const codigo = document.querySelector('#codigo');
-const botonBuscar = document.querySelector('#botonBuscar');
+const botonBuscar = document.querySelector('#boton-buscar');
 const nombre = document.querySelector('#nombre');
 const cantidad = document.querySelector('#cantidad');
-const boxDefecto = document.querySelector('#boxDefecto');
-const estadoBueno = document.querySelector('#estadoBueno');
-const estadoDefecto = document.querySelector('#estadoDefecto');
-const tipoDefecto = document.querySelector('#tipoDefecto');
-const botonLimpiar = document.querySelector('#botonLimpiar');
-const botonCrear = document.querySelector('#botonCrear');
-const botonAgregar = document.querySelector('#botonAgregar'); 
+// OPCIONES
+const botonBorrar = document.querySelector('#boton-borrar');
+const botonCrear = document.querySelector('#boton-crear');
+const botonAgregar = document.querySelector('#boton-agregar'); 
 // PDF
 const pdf = document.querySelector('#pdf');
-const tituloInforme = document.querySelector('#tituloInforme');
-const tituloSemana = document.querySelector('#tituloSemana');
-const tituloDistribuidor = document.querySelector('#tituloDistribuidor');
+const tituloInforme = document.querySelector('#titulo-informe');
+const tituloSemana = document.querySelector('#titulo-semana');
+const tituloDistribuidor = document.querySelector('#titulo-distribuidor');
+// TABLA
 const tabla = document.querySelector('table');
 const tbody = document.querySelector('tbody');
-const botonEliminar = document.querySelectorAll(".botonEliminar");
+const tbBueno = document.querySelector('#tb-bueno');
+const tbDefecto = document.querySelector('#tb-defecto'); 
+const botonEliminar = document.querySelectorAll(".boton-eliminar");
 const total = document.querySelector('#total');
 // MODAL
 const modal = document.querySelector('#modal');
 const consulta = document.querySelector('#consulta');
-const botonConsulta = document.querySelector('#botonConsulta');
-const tbodyConsulta = document.querySelector('#tbodyConsulta');  
-const botonCerrar = document.querySelector('#botonCerrar'); 
+const botonConsulta = document.querySelector('#boton-consulta');
+const botonCerrar = document.querySelector('#boton-cerrar'); 
+const tablaConsulta = document.querySelector('#tabla-consulta'); 
+const tbConsulta = document.querySelector('#tb-consulta');  
 //RADIO
 estadoBueno.addEventListener('change', function() 
 { 
@@ -48,6 +54,7 @@ estadoDefecto.addEventListener('change', function()
 { 
     if(estadoDefecto.checked == true)
     {
+        tipoDefecto.selectedIndex = 0;
         boxDefecto.style.display = 'flex';
         tipoDefecto.focus();
     }
@@ -80,6 +87,7 @@ codigo.addEventListener('input', function()
                 //...
             }
         }
+
         nuevoTexto = nuevoTexto.substring(0,5);
         codigo.value = nuevoTexto;
 
@@ -97,6 +105,22 @@ codigo.addEventListener('input', function()
         //...
     }
 });
+function buscarItem()
+{
+    var filtro = items.filter(items => items.id == codigo.value);
+
+    if(filtro.length > 0)
+    {
+        nombre.value = filtro[0].nombre.toUpperCase();        
+        nombre.disabled = true;                   
+        cantidad.focus();
+    }
+    else
+    {
+        nombre.disabled = false;
+        nombre.focus();               
+    }
+}
 cantidad.addEventListener('input', function()
 {    
     var num = ['0','1','2','3','4','5','6','7','8','9'];
@@ -132,22 +156,6 @@ cantidad.addEventListener('input', function()
         cantidad.value = nuevoTexto; 
     }
 }); 
-function buscarItem()
-{
-    var filtro = listaItems.filter(listaItems => listaItems.id == codigo.value);
-
-    if(filtro.length > 0)
-    {
-        nombre.value = filtro[0].nombre.toUpperCase();        
-        nombre.disabled = true;                   
-        cantidad.focus();
-    }
-    else
-    {
-        nombre.disabled = false;
-        nombre.focus();               
-    }
-}
 //PRESIONAR ENTER & RESTRINGIR SOLO-NUMEROS
 codigo.addEventListener('keydown', function(e)
 {
@@ -251,7 +259,7 @@ function siguienteFocus()
 //AGREGAR ITEM
 botonAgregar.addEventListener('click', function() 
 {
-    agregarItem();    
+    agregarItem();  
 });
 function agregarItem()
 {
@@ -274,7 +282,7 @@ function agregarItem()
         }
         else
         {
-            var numeroFilas = tbody.rows.length;
+            var numeroFilas = tbBueno.rows.length;
 
             if(numeroFilas > 0)
             {
@@ -283,10 +291,9 @@ function agregarItem()
     
                 for(var i = 0; i < numeroFilas; i++)
                 {
-                    var codigoFila = tbody.rows[i].cells[0].innerHTML;
-                    var estadoFila = tbody.rows[i].cells[4].innerHTML;
+                    var codigoFila = tbBueno.rows[i].cells[0].innerHTML;
         
-                    if(codigoFila == codigo.value && estadoFila == 0)
+                    if(codigoFila == codigo.value)
                     {
                         index = i;
                         duplicado++;                    
@@ -295,7 +302,7 @@ function agregarItem()
 
                 if(duplicado > 0) 
                 {
-                    var celdaCantidad = tbody.rows[index].cells[2];
+                    var celdaCantidad = tbBueno.rows[index].cells[2];
                     var nuevaCantidad = parseInt(celdaCantidad.innerHTML) + parseInt(cantidad.value);
                     celdaCantidad.innerHTML = nuevaCantidad.toString();
                     sumarItems();
@@ -303,12 +310,12 @@ function agregarItem()
                 }
                 else
                 {
-                    agregarItemNormal(validarNombre);
+                    agregarItemBueno(validarNombre);
                 }
             }
             else
             {
-                agregarItemNormal(validarNombre);
+                agregarItemBueno(validarNombre);
             } 
         }
     }
@@ -316,6 +323,28 @@ function agregarItem()
     {
         siguienteFocus();
     }         
+}
+function agregarItemBueno(validarNombre)
+{
+    var item = validarNombre;
+    var row = tbBueno.insertRow(0);
+    var cell1 = row.insertCell(0);
+    var cell2 = row.insertCell(1);
+    var cell3 = row.insertCell(2);
+    var cell4 = row.insertCell(3);
+    
+    cell1.innerHTML = codigo.value;
+    cell1.classList.add('col-1');
+    cell2.innerHTML = item;
+    cell2.classList.add('col-2');
+    cell3.innerHTML = cantidad.value;
+    cell3.classList.add('col-3');
+    cell3.classList.add('cantidad');
+    cell4.innerHTML = '<button class="boton-eliminar" onclick="eliminar(this)"><i class="far fa-trash-alt"></i></button>';
+    cell4.classList.add('col-4');
+
+    sumarItems();
+    limpiarDatos();
 }
 function agregarItemDefecto(validarNombre)
 {
@@ -326,12 +355,11 @@ function agregarItemDefecto(validarNombre)
     {
         item = item+' (DEFECTO: '+textoTipoDefecto+')';
 
-        var row = tbody.insertRow(0);
+        var row = tbDefecto.insertRow(0);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
-        var cell5 = row.insertCell(4);
         
         cell1.innerHTML = codigo.value;
         cell1.classList.add('col-1');
@@ -340,10 +368,8 @@ function agregarItemDefecto(validarNombre)
         cell3.innerHTML = cantidad.value;
         cell3.classList.add('col-3');
         cell3.classList.add('cantidad');
-        cell4.innerHTML = '<button class="botonEliminar" onclick="eliminar(this)"><i class="far fa-trash-alt"></i></button>';
+        cell4.innerHTML = '<button class="boton-eliminar" onclick="eliminar(this)"><i class="far fa-trash-alt"></i></button>';
         cell4.classList.add('col-4');
-        cell5.innerHTML = '1';
-        cell5.classList.add('col-5');
         
         sumarItems();
         limpiarDatos();
@@ -352,43 +378,6 @@ function agregarItemDefecto(validarNombre)
     {
         siguienteFocus();
     }
-}
-function agregarItemNormal(validarNombre)
-{
-    var item = validarNombre;
-    var row = tbody.insertRow(0);
-    var cell1 = row.insertCell(0);
-    var cell2 = row.insertCell(1);
-    var cell3 = row.insertCell(2);
-    var cell4 = row.insertCell(3);
-    var cell5 = row.insertCell(4);
-    
-    cell1.innerHTML = codigo.value;
-    cell1.classList.add('col-1');
-    cell2.innerHTML = item;
-    cell2.classList.add('col-2');
-    cell3.innerHTML = cantidad.value;
-    cell3.classList.add('col-3');
-    cell3.classList.add('cantidad');
-    cell4.innerHTML = '<button class="botonEliminar" onclick="eliminar(this)"><i class="far fa-trash-alt"></i></button>';
-    cell4.classList.add('col-4');
-    cell5.innerHTML = '0';
-    cell5.classList.add('col-5');
-
-    sumarItems();
-    limpiarDatos();
-}
-//LIMPIAR
-function limpiarDatos()
-{
-    boxDefecto.style.display = 'none';
-    tipoDefecto.selectedIndex = 0;
-    estadoBueno.checked = true;
-    codigo.value = '';
-    nombre.value = '';
-    nombre.disabled = true;
-    cantidad.value = '';
-    codigo.focus();
 }
 //SUMAR ITEMS
 function sumarItems()
@@ -401,6 +390,18 @@ function sumarItems()
     });
     total.innerHTML = 'Total Items: '+suma;
 }
+//LIMPIAR
+function limpiarDatos()
+{
+    boxDefecto.style.display = 'none';
+    tipoDefecto.selectedIndex = 0;
+    estadoBueno.checked = true;
+    codigo.value = '';    
+    nombre.disabled = true;
+    nombre.value = '';
+    cantidad.value = '';
+    codigo.focus();
+}
 //ELIMINAR FILA
 function eliminar(e)
 {       
@@ -409,17 +410,19 @@ function eliminar(e)
     tr.parentNode.removeChild(tr); 
     sumarItems();
 }
-botonLimpiar.addEventListener('click', function()
+botonBorrar.addEventListener('click', function()
 { 
-    var filas = tbody.rows.length;
+    var filasTbueno = tbBueno.rows.length;
+    var filasTdefecto = tbDefecto.rows.length;
     
-    if(filas > 0)
+    if(filasTbueno > 0 || filasTdefecto > 0)
     {
         var confirmar = confirm('¿BORRAR TODOS LOS DATOS?');
 
         if(confirmar == true)
         {
-            tbody.innerHTML = '';
+            tbBueno.innerHTML = '';
+            tbDefecto.innerHTML = '';
             sumarItems();
             limpiarDatos();
         }
@@ -436,23 +439,17 @@ botonLimpiar.addEventListener('click', function()
 // MODAL
 botonBuscar.addEventListener('click', function() 
 {
-    tbodyConsulta.innerHTML = '';        
+    tbConsulta.innerHTML = '';        
     consulta.value = ''; 
 
-    if(codigo.disabled == false)
-    {        
-        modal.style.display = 'flex';
-        consulta.focus(); 
-    }
-    else
-    {
-        modal.style.display = 'none'; 
-    }
+    modal.style.display = 'flex';
+    consulta.focus(); 
 });
 botonCerrar.addEventListener('click', function() 
 { 
     modal.style.display = 'none';
-    tbodyConsulta.innerHTML = '';        
+
+    tbConsulta.innerHTML = '';        
     consulta.value = ''; 
 });
 botonConsulta.addEventListener('click', function() 
@@ -470,7 +467,7 @@ consulta.addEventListener('keydown', function(e)
 });
 function consultarItem()
 {    
-    tbodyConsulta.innerHTML = ''; 
+    tbConsulta.innerHTML = ''; 
     var query = consulta.value.toUpperCase();
     
     if(query.length > 3) 
@@ -479,10 +476,10 @@ function consultarItem()
         {
             return e.nombre.indexOf(query) > -1;
         });
-    
+                
         busqueda.forEach(function(e)
         {
-            var row = tbodyConsulta.insertRow(0);
+            var row = tbConsulta.insertRow(0);
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
@@ -507,10 +504,44 @@ function itemSeleccionado(e)
     modal.style.display = 'none'; 
 }
 //ORDENAR ITEM TABLA POR ABCEDARIO
-function sortTable(e)
+function ordenarTbody(nombreTB)
+{
+    var body, rows, switching, i, x, y, shouldSwitch;
+    
+    body = nombreTB;
+    switching = true;
+
+    while (switching)
+    {
+        switching = false;
+        rows = body.rows;
+
+        for(i = 0; i < (rows.length - 1); i++)
+        {
+            shouldSwitch = false;
+            x = rows[i].cells[1].innerHTML;
+            y = rows[i + 1].cells[1].innerHTML;
+
+            if(x.toLowerCase() > y.toLowerCase())
+            {
+                shouldSwitch = true;
+                break;
+            }
+        }        
+    }
+    if(shouldSwitch)
+    {        
+        rows[i].parentNode.insertBefore(rows[i + 1], rows[i]);
+        switching = true;
+    }
+}
+
+
+
+function sortTable(nombreTabla)
 {
     var table, rows, switching, i, x, y, shouldSwitch;
-    table = e;
+    table = nombreTabla;
     switching = true;
     /* Make a loop that will continue until
     no switching has been done: */
@@ -519,7 +550,7 @@ function sortTable(e)
       // Start by saying: no switching is done:
       switching = false;
       rows = table.rows;
-      
+      console.log(rows);
       /* Loop through all table rows (except the
       first, which contains table headers): */
       for(i = 1; i < (rows.length - 1); i++)
@@ -554,9 +585,10 @@ botonCrear.addEventListener('click', function()
 });
 function crearPDF()
 {
-    var filas = tbody.rows.length; 
-
-    if(filas > 0)
+    var filasTbueno = tbBueno.rows.length;
+    var filasTdefecto = tbDefecto.rows.length;
+    
+    if(filasTbueno > 0 || filasTdefecto > 0)
     {
         if(tipoInforme.value != 0 && semana.value != 0 && distribuidor.value != 0 && distribuidor.value != 99)
         {
@@ -580,9 +612,10 @@ function crearPDF()
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             
-            sortTable(tabla);
+            ordenarTbody(tbBueno);
+            ordenarTbody(tbDefecto);
             ocultarColumna('none', 'block');
-            
+
             html2pdf().set(opt).from(element).save().then(function()
             {
                 ocultarColumna('block', 'none');                
@@ -637,60 +670,8 @@ function semanaActual()
     semana.selectedIndex = numeroSemana;    
    
 }
-function cargarDistribuidores()
-{
-    
-    listaDistribuidores.sort();
-    indice = 1;
-
-    for (value in listaDistribuidores)
-    {
-        var option = document.createElement('option');        
-        option.value = indice; 
-        option.text = listaDistribuidores[value];
-        distribuidor.add(option);
-        indice++;
-    }
-
-    var option = document.createElement('option'); 
-    option.value = '99'; 
-    option.text = '';
-    distribuidor.add(option);
-
-    var option = document.createElement('option'); 
-    option.value = '100'; 
-    option.text = 'stock';
-    distribuidor.add(option);
-}
-function cargarDefectos()
-{
-    
-    listaDefectos.sort();
-    indice = 1;
-
-    for (value in listaDefectos)
-    {
-        var option = document.createElement('option');        
-        option.value = indice; 
-        option.text = listaDefectos[value];
-        tipoDefecto.add(option);
-        indice++;
-    }
-
-    var option = document.createElement('option'); 
-    option.value = '99'; 
-    option.text = '';
-    tipoDefecto.add(option);
-
-    var option = document.createElement('option'); 
-    option.value = '100'; 
-    option.text = 'otro';
-    tipoDefecto.add(option);
-}
 //html load
 window.onload = function(event) 
 {
     semanaActual();
-    cargarDistribuidores();
-    cargarDefectos();
 }

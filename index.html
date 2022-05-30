@@ -11,11 +11,11 @@
     <body>
         <div id="contenedor">
             <div id="informacion">
-                <div id="boxError"></div>
-                <div id="tituloPagina">planilla de informe</div>
+                <div id="box-error"></div>
+                <div id="titulo-pagina">planilla de informe</div>
                 <div class="box">
-                    <label for="tipoInforme">tipo de informe</label>
-                    <select name="tipoInforme" id="tipoInforme">
+                    <label for="tipo-informe">tipo de informe</label>
+                    <select name="tipo-informe" id="tipo-informe">
                         <option value="0" selected disabled hidden></option>
                         <option value="1">inventario</option>
                         <option value="2">devolucion</option>
@@ -85,31 +85,60 @@
                     <label for="distribuidor">distribuidor</label>
                     <select name="distribuidor" id="distribuidor">
                         <option value="0" selected disabled hidden></option>
+                        <option value="1">claudia perez cobo</option>
+                        <option value="2">constanza oliva villagran</option>
+                        <option value="3">debora sanhueza yesca</option>
+                        <option value="4">elizabeth sanhueza cid</option>
+                        <option value="5">juan fernandez diaz</option>
+                        <option value="6">katherine sanhueza cid</option>
+                        <option value="7">lidia lepiqueo orellana</option>
+                        <option value="8">marcela pinchuleo concha</option>
+                        <option value="9">maria f. cornejo ibarra</option>
+                        <option value="10">maryori albornoz matamala</option>
+                        <option value="11">monica oliva quiroga</option>
+                        <option value="12">nayareth sanhueza valdez</option>
+                        <option value="13">paula jofre duran</option>
+                        <option value="14">priscila saez donoso</option>
+                        <option value="15">valentina cancino maldonado</option>
+                        <option value="16">violeta poblete soto</option>
+                        <option value="17">viviana soto oliva</option>
+                        <option value="18">yocelin sanhueza sanhueza</option>
+                        <option value="99"></option>
+                        <option value="98">stock</option>
                     </select>    
                 </div>
                 <div class="box">
                     <label for="estado">item estado</label>
-                    <div class="boxEstado">
-                        <div class="itemEstado">
-                            <input type="radio" name="itemEstado" id="estadoBueno" checked>
-                            <label for="estado">buen estado</label>                            
+                    <div class="box-estado">
+                        <div class="item-estado">
+                            <input type="radio" name="item-estado" id="estado-bueno" checked>
+                            <label for="estado">bueno</label>                            
                         </div>
-                        <div class="itemEstado">
-                            <input type="radio" name="itemEstado" id="estadoDefecto">
+                        <div class="item-estado">
+                            <input type="radio" name="item-estado" id="estado-defecto">
                             <label for="estado">con defecto</label>                            
                         </div>                        
                     </div> 
                 </div>
-                <div class="box" id="boxDefecto">
-                    <label for="tipoDefecto">tipo de defecto</label>
-                    <select name="tipoDefecto" id="tipoDefecto">
+                <div class="box" id="box-defecto">
+                    <label for="tipo-defecto">tipo de defecto</label>
+                    <select name="tipo-defecto" id="tipo-defecto">
                         <option value="0" selected disabled hidden></option>
+                        <option value="1">despegado</option>
+                        <option value="2">diferencia en tamaño</option>
+                        <option value="3">falta una pieza</option>
+                        <option value="4">falta adorno</option>
+                        <option value="5">manchado</option>
+                        <option value="6">otro</option>
+                        <option value="7">rallado</option>
+                        <option value="8">sin etiqueta</option>
+                        <option value="9">roto</option>
                     </select>
                 </div>             
                 <div class="box">
                     <label for="codigo">item codigo</label>
                     <input type="number" name="codigo" id="codigo">
-                    <button id="botonBuscar"><i class="fas fa-search"></i></button> 
+                    <button id="boton-buscar"><i class="fas fa-search"></i></button> 
                 </div>
                 <div class="box">
                     <label for="nombre">item nombre</label>
@@ -118,18 +147,17 @@
                 <div class="box">
                     <label for="cantidad">item cantidad</label>
                     <input type="number" name="cantidad" id="cantidad">
-                </div>    
-                
-                <div class="boxOpciones">
-                    <button class="boton" id="botonLimpiar">borrar todo</button>
-                    <button class="boton" id="botonCrear">cread pdf</button>
-                    <button class="boton" id="botonAgregar">agregar</button>
+                </div>                
+                <div class="box" id="box-botones">
+                    <button class="boton" id="boton-borrar">borrar todo</button>
+                    <button class="boton" id="boton-crear">cread pdf</button>
+                    <button class="boton" id="boton-agregar">agregar</button>
                 </div>
             </div>            
             <div id="pdf">
-                <div id="tituloInforme"></div>
-                <div id="tituloSemana"></div>
-                <div id="tituloDistribuidor"></div>
+                <div id="titulo-informe"></div>
+                <div id="titulo-semana"></div>
+                <div id="titulo-distribuidor"></div>
                 <div id="tabla">
                     <table>
                         <thead>
@@ -138,23 +166,24 @@
                                 <th class="col-2">item</th>
                                 <th class="col-3">cantidad</th>
                                 <th class="col-4">accion</th>
-                                <th class="col-5">estado</th>
                             </tr>
                         </thead>
-                        <tbody></tbody>
+                        <tbody id="tb-bueno"></tbody>
+                        <tbody id="tb-defecto"></tbody>
                     </table>
                 </div>                
                 <div id="total">total item: 0</div>
             </div>
         </div>
-        <div id="modal" class="modal">
-            <div class="modalContenido">
-                <div id="tituloConsulta">buscar item por nombre</div>
-                <div id="boxConsulta">
-                    <input type="text" name="consulta" id="consulta">
-                    <button id="botonConsulta">buscar</button>
+        <div id="modal">
+            <div id="modal-contenido">
+                <div id="titulo-consulta">buscar item por nombre</div>
+                <div id="box-consulta">
+                    <input type="text" name="consulta" id="consulta" placeholder="Ingrese minimo 4 letras">
+                    <button id="boton-consulta">buscar</button>
+                    <button id="boton-cerrar">cerrar</button>
                 </div>                
-                <table id="tablaConsulta">
+                <table id="tabla-consulta">
                     <thead>
                         <tr>
                             <th>codigo</th>
@@ -162,17 +191,14 @@
                             <th>accion</th>
                         </tr>
                     </thead>
-                    <tbody id="tbodyConsulta">
+                    <tbody id="tb-consulta">
                     </tbody>
-                </table>
-                <button class="boton" id="botonCerrar">cerrar</button>
+                </table>                
             </div>
         </div>     
         <script src="https://kit.fontawesome.com/225ba68665.js" crossorigin="anonymous"></script>  
-        <script src="pdf.js"></script>
-        <script src="listaDistribuidores.js"></script>
-        <script src="listaDefectos.js"></script>    
-        <script src="listaItems.js"></script>
+        <script src="pdf.js"></script>   
+        <script src="items.js"></script>
         <script src="index.js"></script>
     </body>
 </html>
