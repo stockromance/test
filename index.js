@@ -24,9 +24,7 @@ const tituloSemana = document.querySelector('#titulo-semana');
 const tituloDistribuidor = document.querySelector('#titulo-distribuidor');
 // TABLA
 const tabla = document.querySelector('table');
-const tbody = document.querySelector('tbody');
-const tbBueno = document.querySelector('#tb-bueno');
-const tbDefecto = document.querySelector('#tb-defecto'); 
+const tbodyTabla = document.querySelector('#tbody-tabla');
 const botonEliminar = document.querySelectorAll(".boton-eliminar");
 const total = document.querySelector('#total');
 // MODAL
@@ -35,7 +33,7 @@ const consulta = document.querySelector('#consulta');
 const botonConsulta = document.querySelector('#boton-consulta');
 const botonCerrar = document.querySelector('#boton-cerrar'); 
 const tablaConsulta = document.querySelector('#tabla-consulta'); 
-const tbConsulta = document.querySelector('#tb-consulta');  
+const tbodyConsulta = document.querySelector('#tbody-consulta');  
 //RADIO
 estadoBueno.addEventListener('change', function() 
 { 
@@ -62,6 +60,10 @@ estadoDefecto.addEventListener('change', function()
     {
         boxDefecto.style.display = 'none';
     }   
+});
+tipoDefecto.addEventListener('change', function() 
+{ 
+    codigo.focus();  
 });
 //TECLEO Y/O INGRESOS EN INPUT
 codigo.addEventListener('input', function()
@@ -282,7 +284,7 @@ function agregarItem()
         }
         else
         {
-            var numeroFilas = tbBueno.rows.length;
+            var numeroFilas = tbodyTabla.rows.length;
 
             if(numeroFilas > 0)
             {
@@ -291,9 +293,10 @@ function agregarItem()
     
                 for(var i = 0; i < numeroFilas; i++)
                 {
-                    var codigoFila = tbBueno.rows[i].cells[0].innerHTML;
+                    var codigoFila = tbodyTabla.rows[i].cells[0].innerHTML;
+                    var estadoFila = tbodyTabla.rows[i].cells[4].innerHTML;
         
-                    if(codigoFila == codigo.value)
+                    if(codigoFila == codigo.value && estadoFila == '0')
                     {
                         index = i;
                         duplicado++;                    
@@ -302,7 +305,7 @@ function agregarItem()
 
                 if(duplicado > 0) 
                 {
-                    var celdaCantidad = tbBueno.rows[index].cells[2];
+                    var celdaCantidad = tbodyTabla.rows[index].cells[2];
                     var nuevaCantidad = parseInt(celdaCantidad.innerHTML) + parseInt(cantidad.value);
                     celdaCantidad.innerHTML = nuevaCantidad.toString();
                     sumarItems();
@@ -327,11 +330,12 @@ function agregarItem()
 function agregarItemBueno(validarNombre)
 {
     var item = validarNombre;
-    var row = tbBueno.insertRow(0);
+    var row = tbodyTabla.insertRow(0);
     var cell1 = row.insertCell(0);
     var cell2 = row.insertCell(1);
     var cell3 = row.insertCell(2);
     var cell4 = row.insertCell(3);
+    var cell5 = row.insertCell(4);
     
     cell1.innerHTML = codigo.value;
     cell1.classList.add('col-1');
@@ -342,6 +346,8 @@ function agregarItemBueno(validarNombre)
     cell3.classList.add('cantidad');
     cell4.innerHTML = '<button class="boton-eliminar" onclick="eliminar(this)"><i class="far fa-trash-alt"></i></button>';
     cell4.classList.add('col-4');
+    cell5.innerHTML = '0';
+    cell5.classList.add('col-5');
 
     sumarItems();
     limpiarDatos();
@@ -355,11 +361,12 @@ function agregarItemDefecto(validarNombre)
     {
         item = item+' (DEFECTO: '+textoTipoDefecto+')';
 
-        var row = tbDefecto.insertRow(0);
+        var row = tbodyTabla.insertRow(0);
         var cell1 = row.insertCell(0);
         var cell2 = row.insertCell(1);
         var cell3 = row.insertCell(2);
         var cell4 = row.insertCell(3);
+        var cell5 = row.insertCell(4);
         
         cell1.innerHTML = codigo.value;
         cell1.classList.add('col-1');
@@ -370,6 +377,8 @@ function agregarItemDefecto(validarNombre)
         cell3.classList.add('cantidad');
         cell4.innerHTML = '<button class="boton-eliminar" onclick="eliminar(this)"><i class="far fa-trash-alt"></i></button>';
         cell4.classList.add('col-4');
+        cell5.innerHTML = '1';
+        cell5.classList.add('col-5');
         
         sumarItems();
         limpiarDatos();
@@ -393,14 +402,14 @@ function sumarItems()
 //LIMPIAR
 function limpiarDatos()
 {
-    boxDefecto.style.display = 'none';
-    tipoDefecto.selectedIndex = 0;
     estadoBueno.checked = true;
+    boxDefecto.style.display = 'none';
+    tipoDefecto.selectedIndex = 0;    
     codigo.value = '';    
     nombre.disabled = true;
     nombre.value = '';
     cantidad.value = '';
-    codigo.focus();
+    codigo.focus();    
 }
 //ELIMINAR FILA
 function eliminar(e)
@@ -412,17 +421,15 @@ function eliminar(e)
 }
 botonBorrar.addEventListener('click', function()
 { 
-    var filasTbueno = tbBueno.rows.length;
-    var filasTdefecto = tbDefecto.rows.length;
+    var filas = tbodyTabla.rows.length;
     
-    if(filasTbueno > 0 || filasTdefecto > 0)
+    if(filas > 0)
     {
         var confirmar = confirm('¿BORRAR TODOS LOS DATOS?');
 
         if(confirmar == true)
         {
-            tbBueno.innerHTML = '';
-            tbDefecto.innerHTML = '';
+            tbodyTabla.innerHTML = '';
             sumarItems();
             limpiarDatos();
         }
@@ -439,7 +446,7 @@ botonBorrar.addEventListener('click', function()
 // MODAL
 botonBuscar.addEventListener('click', function() 
 {
-    tbConsulta.innerHTML = '';        
+    tbodyConsulta.innerHTML = '';        
     consulta.value = ''; 
 
     modal.style.display = 'flex';
@@ -449,7 +456,7 @@ botonCerrar.addEventListener('click', function()
 { 
     modal.style.display = 'none';
 
-    tbConsulta.innerHTML = '';        
+    tbodyConsulta.innerHTML = '';        
     consulta.value = ''; 
 });
 botonConsulta.addEventListener('click', function() 
@@ -467,10 +474,10 @@ consulta.addEventListener('keydown', function(e)
 });
 function consultarItem()
 {    
-    tbConsulta.innerHTML = ''; 
+    tbodyConsulta.innerHTML = ''; 
     var query = consulta.value.toUpperCase();
     
-    if(query.length > 3) 
+    if(query.length > 2) 
     {
         var busqueda = items.filter(function(e)
         {
@@ -479,7 +486,7 @@ function consultarItem()
                 
         busqueda.forEach(function(e)
         {
-            var row = tbConsulta.insertRow(0);
+            var row = tbodyConsulta.insertRow(0);
             var cell1 = row.insertCell(0);
             var cell2 = row.insertCell(1);
             var cell3 = row.insertCell(2);
@@ -487,11 +494,10 @@ function consultarItem()
             cell2.innerHTML = e.nombre;  
             cell3.innerHTML = '<td><button class="agregar" onclick="itemSeleccionado(this)"><i class="fas fa-plus"></i></button></td>';
         });
-        sortTable(tablaConsulta);
     }
     else
     {
-        //...
+        consulta.focus();
     }
 }
 function itemSeleccionado(e)
@@ -550,7 +556,6 @@ function sortTable(nombreTabla)
       // Start by saying: no switching is done:
       switching = false;
       rows = table.rows;
-      console.log(rows);
       /* Loop through all table rows (except the
       first, which contains table headers): */
       for(i = 1; i < (rows.length - 1); i++)
@@ -585,10 +590,9 @@ botonCrear.addEventListener('click', function()
 });
 function crearPDF()
 {
-    var filasTbueno = tbBueno.rows.length;
-    var filasTdefecto = tbDefecto.rows.length;
+    var filas = tbodyTabla.rows.length;
     
-    if(filasTbueno > 0 || filasTdefecto > 0)
+    if(filas > 0)
     {
         if(tipoInforme.value != 0 && semana.value != 0 && distribuidor.value != 0 && distribuidor.value != 99)
         {
@@ -612,8 +616,7 @@ function crearPDF()
                 jsPDF:        { unit: 'in', format: 'letter', orientation: 'portrait' }
             };
             
-            ordenarTbody(tbBueno);
-            ordenarTbody(tbDefecto);
+            sortTable(tabla);
             ocultarColumna('none', 'block');
 
             html2pdf().set(opt).from(element).save().then(function()
@@ -644,7 +647,7 @@ function crearPDF()
     }
     else
     {
-        //...
+        codigo.focus();
     }  
 }
 function ocultarColumna(displayCol, displayTitulo)

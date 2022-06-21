@@ -124,15 +124,31 @@
                     <label for="tipo-defecto">tipo de defecto</label>
                     <select name="tipo-defecto" id="tipo-defecto">
                         <option value="0" selected disabled hidden></option>
-                        <option value="1">despegado</option>
-                        <option value="2">diferencia en tamaño</option>
-                        <option value="3">falta una pieza</option>
-                        <option value="4">falta adorno</option>
-                        <option value="5">manchado</option>
-                        <option value="6">otro</option>
-                        <option value="7">rallado</option>
-                        <option value="8">sin etiqueta</option>
-                        <option value="9">roto</option>
+                        <option value="1">adorno se cae</option>
+                        <option value="2">alambre suelto</option>
+                        <option value="3">arrugada</option>
+                        <option value="4">costura abierta</option>
+                        <option value="5">daño por polillas</option>
+                        <option value="6">defecto cremallera</option>
+                        <option value="7">defecto impresión</option>
+                        <option value="8">deshilachada</option>
+                        <option value="9">diferencia de tamaño</option>
+                        <option value="10">falta adorno</option>
+                        <option value="11">falta boton</option>
+                        <option value="12">falta par del conjunto</option>
+                        <option value="13">lavada o encogida</option>
+                        <option value="14">mal cosida</option>
+                        <option value="15">mal olor</option>
+                        <option value="16">manchada</option>
+                        <option value="17">marca de cigarro</option>
+                        <option value="18">otro</option>
+                        <option value="19">perforada</option>
+                        <option value="20">rayada</option>
+                        <option value="21">rota</option>
+                        <option value="22">sin coser</option>
+                        <option value="23">sin etiqueta</option>
+                        <option value="24">sucia</option>
+                        <option value="25">usada</option>
                     </select>
                 </div>             
                 <div class="box">
@@ -166,10 +182,10 @@
                                 <th class="col-2">item</th>
                                 <th class="col-3">cantidad</th>
                                 <th class="col-4">accion</th>
+                                <th class="col-5">estado</th>
                             </tr>
                         </thead>
-                        <tbody id="tb-bueno"></tbody>
-                        <tbody id="tb-defecto"></tbody>
+                        <tbody id="tbody-tabla"></tbody>
                     </table>
                 </div>                
                 <div id="total">total item: 0</div>
@@ -179,7 +195,7 @@
             <div id="modal-contenido">
                 <div id="titulo-consulta">buscar item por nombre</div>
                 <div id="box-consulta">
-                    <input type="text" name="consulta" id="consulta" placeholder="Ingrese minimo 4 letras">
+                    <input type="text" name="consulta" id="consulta" placeholder="Ingrese minimo 3 letras">
                     <button id="boton-consulta">buscar</button>
                     <button id="boton-cerrar">cerrar</button>
                 </div>                
@@ -188,10 +204,10 @@
                         <tr>
                             <th>codigo</th>
                             <th>item</th>
-                            <th>accion</th>
+                            <th>accion</th>                            
                         </tr>
                     </thead>
-                    <tbody id="tb-consulta">
+                    <tbody id="tbody-consulta">
                     </tbody>
                 </table>                
             </div>

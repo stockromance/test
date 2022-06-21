@@ -177,16 +177,15 @@ html, body
     width: 100%;
 }
 table
-{        
-    /*border-collapse: collapse;*/
+{
+    /* border-spacing: 0;
+    border-collapse: collapse; */
     margin-bottom: 15px;
 }
-/*
 table tr:nth-child(even) td
 {
-    background-color: #f3f3f3
+   /* background-color: #f6f6f6 */
 }
-*/
 table th, table td 
 {
     border: 0.1px solid #000000;
@@ -212,11 +211,16 @@ table th, table td
 {    
     text-align: center; 
 }
-thead .col-1, thead .col-2, thead .col-3, thead .col-4
+.col-5
+{    
+    text-align: center; 
+}
+thead .col-1, thead .col-2, thead .col-3, thead .col-4, thead .col-5
 {
     padding-top: 5px;
     padding-bottom: 5px;
-    text-align: center;     
+    text-align: center;    
+    /* background-color: #f9f9fb; */ 
 }
 .boton-eliminar 
 {    
@@ -245,6 +249,10 @@ thead .col-1, thead .col-2, thead .col-3, thead .col-4
 #titulo-distribuidor 
 {
     display: none;
+}
+.col-5
+{
+    display: none;    
 }
 /* MODAL */
 #modal 
