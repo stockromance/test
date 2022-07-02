@@ -3,13 +3,13 @@
     font-family: 'roboto';
     src: url('roboto.ttf');
 }
-* 
+*
 {
     margin: 0;
     padding: 0;
     box-sizing: border-box;
     font-family: 'roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-    font-size: 12.5px;  
+    font-size: 12.5px;
     text-transform: uppercase;
 }
 html, body 
@@ -21,31 +21,31 @@ html, body
 #contenedor
 {    
     display: grid;
-    grid-template-areas:    '.   informacion    .'
+    grid-template-areas:    '.   principal      .'
                             '.   pdf            .';
-    grid-template-rows: auto auto;
+    grid-template-rows:     auto auto;
     grid-template-columns: auto minmax(auto, 600px) auto;    
 }
-#informacion 
+#principal 
 {
-    grid-area: informacion;
+    grid-area: principal;
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
 }
 #pdf 
 {
     grid-area: pdf;
     display: flex;
-    flex-direction: column; 
-    align-items: center;
+    flex-direction: column;
+    align-items: center; 
 }
 /* INFORMACION */
-#tituloPagina
-{    
-    font-size: 24px;
-    margin-top: 20px;
-    margin-bottom: 20px;
+#titulo-principal
+{
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;    
 }
 .box 
 {
@@ -55,23 +55,21 @@ html, body
 }
 .box label 
 {
-    height: 30px;
+    height: 25px;
     width: 120px;
     display: flex;
     align-items: center;
 }
 .box input
 {
-    height: 30px;
+    height: 25px;
     width: 240px;
-    font-size: 13px;
     padding-left: 3.5px;
 }
 .box select 
 {
-    height: 30px;
+    height: 25px;
     width: 240px;
-    font-size: 13px;
 }
 .boton 
 {
@@ -80,63 +78,100 @@ html, body
     cursor: pointer;
     border: 0.1px solid #777777;
 }
-.boxOpciones 
+#box-botones 
 { 
     width: 360px;
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-top: 5px;
     margin-bottom: 15px;
 }
-#botonLimpiar 
+#boton-borrar 
 {
     background-color: #cf1322;
     color: #ffffff;
 }
-#botonCrear 
+#boton-crear 
 {
     background-color: #389e0d;
     color: #ffffff;
 }
-#botonAgregar 
+#boton-agregar 
 {
     background-color: #096dd9;
     color: #ffffff;
 }
+/* ESTADO ITEM */
+#box-estado
+{
+    display: flex;
+    flex-direction: row;
+    width: 240px;
+}
+.box-estado-item
+{
+    display: flex;
+    flex-direction: row;
+    width: 120px;
+}
+.box-estado-item label
+{
+    width: auto;
+    margin-left: 5px; 
+    font-size: 11.5px;
+}
+.box-estado-item input
+{
+    width: auto;
+}
 /* BUSCAR CODIGO */
 #codigo 
 {
-    width: 205px;
+    width: 210px;
     margin-right: 5px;
 }
-#botonBuscar 
+#boton-buscar 
 {
-    width: 30px;
-    height: 30px;
+    width: 25px;
+    height: 25px;
     cursor: pointer;
     border: 0.1px solid #cccccc; 
     background-color: #531dab;
     color: #ffffff;
 }
 /* PDF */
-#tituloInforme 
+#encabezado-pdf
+{    
+    width: 100%;    
+}
+.titulo-encabezado
 {
-    font-size: 24px;
+    width: 100%;
+    text-align: center;
+}
+#titulo-informe, #titulo-informe span 
+{
+    font-size: 22px;
     font-weight: bold;
 }
-#tituloSemana 
+#titulo-distribuidor, #titulo-distribuidor span 
 {
-    font-size: 24px;
-    font-weight: bold;
+    font-size: 22px;    
+    font-weight: bold;    
 }
-#tituloDistribuidor 
+#titulo-semana, #titulo-semana span 
 {
-    font-size: 20px;
+    font-size: 22px;
+}
+#titulo-creado, #titulo-creado span
+{
+    font-size: 16px; 
     margin-bottom: 15px;
 }
-#total 
+#titulo-total, #titulo-total span 
 {
-    font-size: 18px;
+    font-size: 16px;
     font-weight: bold;
     margin-bottom: 15px;
 }
@@ -146,8 +181,9 @@ html, body
     width: 100%;
 }
 table
-{        
-    border-collapse: collapse;
+{
+    /* border-spacing: 0;
+    border-collapse: collapse; */
     margin-bottom: 15px;
 }
 table th, table td 
@@ -175,39 +211,26 @@ table th, table td
 {    
     text-align: center; 
 }
-thead .col-1, thead .col-2, thead .col-3, thead .col-4
+.col-5
+{    
+    text-align: center; 
+}
+thead .col-1, thead .col-2, thead .col-3, thead .col-4, thead .col-5
 {
     padding-top: 5px;
     padding-bottom: 5px;
-    text-align: center;     
+    text-align: center;    
 }
-.botonEliminar 
+.boton-eliminar 
 {    
     cursor: pointer;
     background: none;
     border: none;
     padding: 2px;
 }
-.botonEliminar i 
+.boton-eliminar i 
 {
     font-size: 14px; 
-}
-/* OCULTOS */
-#boxObservacion 
-{
-    display: none;
-}
-#tituloInforme 
-{
-    display: none;
-}
-#tituloSemana 
-{
-    display: none;
-}
-#tituloDistribuidor 
-{
-    display: none;
 }
 /* MODAL */
 #modal 
@@ -225,11 +248,11 @@ thead .col-1, thead .col-2, thead .col-3, thead .col-4
     background-color: rgba(0, 0, 0, 0.8);
     overflow: auto;
 }
-.modalContenido 
+#modal-contenido 
 {
     display: flex;
     flex-direction: column;
-    align-items: center;
+    align-items: center; 
     background-color: #ffffff;
     width: 100%;
     max-width: 600px;
@@ -237,13 +260,13 @@ thead .col-1, thead .col-2, thead .col-3, thead .col-4
     border: 0.1px solid #000000; 
     margin-top: 10px;  
 }
-#tituloConsulta 
+#titulo-consulta 
 {
     display: flex;
     font-size: 18px;
     margin-bottom: 10px;
 }
-#boxConsulta 
+#box-consulta 
 {
     display: flex;
     flex-direction: row;
@@ -255,29 +278,38 @@ thead .col-1, thead .col-2, thead .col-3, thead .col-4
     text-transform: uppercase;
     padding-left: 3.5px;    
 }
-#botonConsulta 
+#boton-consulta 
 {
     width: 75px;
-    height: 30px;
-    cursor: pointer;
-    border: 0.1px solid #cccccc; 
+    height: 30px;    
     background-color: #531dab;
     color: #ffffff;
+    cursor: pointer;
+    border: 0.1px solid #cccccc; 
     margin-left: 5px;   
 }
-#tablaConsulta 
+#boton-cerrar
+{    
+    width: 75px;
+    height: 30px;
+    background-color: #cf1322;
+    color: #ffffff;
+    cursor: pointer;
+    border: 0.1px solid #cccccc; 
+    margin-left: 5px;
+}
+#tabla-consulta 
 {
     width: 100%;
-    max-width: 700px;
+    max-width: 600px;
     border-collapse: collapse;
-    margin-top: 10px;
-    margin-bottom: 10px;
+    margin: 10px;
 }
-#tablaConsulta thead th 
+#tabla-consulta thead th 
 {
     text-align: center;
 }
-#tablaConsulta th, #tablaConsulta td 
+#tabla-consulta th, #tabla-consulta td 
 {
     border: 0.1px solid #000000;
     padding-left: 5px;
@@ -286,27 +318,27 @@ thead .col-1, thead .col-2, thead .col-3, thead .col-4
     padding-bottom: 1.5px;
     text-transform: uppercase;
 }
-#tablaConsulta th:nth-child(1), td:nth-child(1) 
+#tabla-consulta th:nth-child(1), td:nth-child(1) 
 {
     width: 70px;
 }
-#tablaConsulta td:nth-child(1) 
+#tabla-consulta td:nth-child(1) 
 {
     text-align: center;
 }
-#tablaConsulta th:nth-child(2), td:nth-child(2) 
+#tabla-consulta th:nth-child(2), td:nth-child(2) 
 {
     min-width: 110px;
 }
-#tablaConsulta td:nth-child(2) 
+#tabla-consulta td:nth-child(2) 
 {
     text-align: left;
 }
-#tablaConsulta th:nth-child(3), td:nth-child(3) 
+#tabla-consulta th:nth-child(3), td:nth-child(3) 
 {
     width: 40px;
 }
-#tablaConsulta td:nth-child(3) 
+#tabla-consulta td:nth-child(3) 
 {
     text-align: center;
 }
@@ -319,13 +351,20 @@ thead .col-1, thead .col-2, thead .col-3, thead .col-4
 }
 .agregar i 
 {
-    font-size: 12px;
+    font-size: 14px;
 }
-#botonCerrar
-{    
-    height: 30px;
-    background-color: #cf1322;
-    color: #ffffff;
+/* OCULTAR */
+#box-defecto 
+{
+    display: none;
+}
+#encabezado-pdf
+{
+    display: none;
+}
+.col-5
+{
+    display: none;    
 }
 #modal
 {    
