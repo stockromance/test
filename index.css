@@ -1,0 +1,375 @@
+@font-face 
+{
+    font-family: 'roboto';
+    src: url('roboto.ttf');
+}
+*
+{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'roboto','Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-size: 12.5px;
+    text-transform: uppercase;
+}
+html, body 
+{
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    overscroll-behavior: contain;
+}
+#contenedor
+{    
+    display: grid;
+    grid-template-areas:    '.   principal    .'
+                            '.   pdf            .';
+    grid-template-rows: auto auto;
+    grid-template-columns: auto minmax(auto, 600px) auto;    
+}
+#principal 
+{
+    grid-area: principal;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+#pdf 
+{
+    grid-area: pdf;
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+}
+/* INFORMACION */
+#titulo-principal
+{
+    font-size: 20px;
+    margin-top: 15px;
+    margin-bottom: 15px;    
+}
+.box 
+{
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 10px;
+}
+.box label 
+{
+    height: 25px;
+    width: 120px;
+    display: flex;
+    align-items: center;
+}
+.box input
+{
+    height: 25px;
+    width: 240px;
+    padding-left: 3.5px;
+}
+.box select 
+{
+    height: 25px;
+    width: 240px;
+}
+.boton 
+{
+    width: 110px;
+    height: 30px;
+    cursor: pointer;
+    border: 0.1px solid #777777;
+}
+#box-botones 
+{ 
+    width: 360px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    margin-top: 5px;
+    margin-bottom: 15px;
+}
+#boton-borrar 
+{
+    background-color: #cf1322;
+    color: #ffffff;
+}
+#boton-crear 
+{
+    background-color: #389e0d;
+    color: #ffffff;
+}
+#boton-agregar 
+{
+    background-color: #096dd9;
+    color: #ffffff;
+}
+/* ESTADO ITEM */
+#box-estado
+{
+    display: flex;
+    flex-direction: row;
+    width: 240px;
+}
+.box-estado-item
+{
+    display: flex;
+    flex-direction: row;
+    width: 120px;
+}
+.box-estado-item label
+{
+    width: auto;
+    margin-left: 5px; 
+    font-size: 11.5px;
+}
+.box-estado-item input
+{
+    width: auto;
+}
+/* BUSCAR CODIGO */
+#codigo 
+{
+    width: 210px;
+    margin-right: 5px;
+}
+#boton-buscar 
+{
+    width: 25px;
+    height: 25px;
+    cursor: pointer;
+    border: 0.1px solid #cccccc; 
+    background-color: #531dab;
+    color: #ffffff;
+}
+/* PDF */
+#encabezado-pdf
+{    
+    width: 100%;    
+}
+.titulo-encabezado
+{
+    width: 100%;
+    text-align: center;
+}
+#titulo-informe, #titulo-informe span 
+{
+    font-size: 22px;
+    font-weight: bold;
+}
+#titulo-distribuidor, #titulo-distribuidor span 
+{
+    font-size: 22px;    
+    font-weight: bold;    
+}
+#titulo-semana, #titulo-semana span 
+{
+    font-size: 22px;
+}
+#titulo-creado, #titulo-creado span
+{
+    font-size: 16px; 
+    margin-bottom: 15px;
+}
+#titulo-total, #titulo-total span 
+{
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 15px;
+}
+/* TABLAS PERSONALIZACION */
+#tabla
+{
+    width: 100%;
+}
+table
+{
+    /* border-spacing: 0;
+    border-collapse: collapse; */
+    margin-bottom: 15px;
+}
+table th, table td 
+{
+    border: 0.1px solid #000000;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 1.5px;
+    padding-bottom: 1.5px;
+}
+.col-1
+{    
+    text-align: center;
+}
+.col-2
+{
+    width: 100%;
+    text-align: left;  
+}
+.col-3
+{    
+    text-align: right;   
+}
+.col-4
+{    
+    text-align: center; 
+}
+.col-5
+{    
+    text-align: center; 
+}
+thead .col-1, thead .col-2, thead .col-3, thead .col-4, thead .col-5
+{
+    padding-top: 5px;
+    padding-bottom: 5px;
+    text-align: center;    
+}
+.boton-eliminar 
+{    
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 2px;
+}
+.boton-eliminar i 
+{
+    font-size: 14px; 
+}
+/* MODAL */
+#modal 
+{
+    position: fixed;
+    z-index: 1;
+    left: 0;
+    top: 0; 
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;       
+    background-color: rgb(0,0,0);
+    background-color: rgba(0, 0, 0, 0.8);
+    overflow: auto;
+}
+#modal-contenido 
+{
+    display: flex;
+    flex-direction: column;
+    align-items: center; 
+    background-color: #ffffff;
+    width: 100%;
+    max-width: 600px;
+    padding: 10px;
+    border: 0.1px solid #000000; 
+    margin-top: 10px;  
+}
+#titulo-consulta 
+{
+    display: flex;
+    font-size: 18px;
+    margin-bottom: 10px;
+}
+#box-consulta 
+{
+    display: flex;
+    flex-direction: row;
+}
+#consulta 
+{
+    height: 30px;
+    width: 240px;
+    text-transform: uppercase;
+    padding-left: 3.5px;    
+}
+#boton-consulta 
+{
+    width: 75px;
+    height: 30px;    
+    background-color: #531dab;
+    color: #ffffff;
+    cursor: pointer;
+    border: 0.1px solid #cccccc; 
+    margin-left: 5px;   
+}
+#boton-cerrar
+{    
+    width: 75px;
+    height: 30px;
+    background-color: #cf1322;
+    color: #ffffff;
+    cursor: pointer;
+    border: 0.1px solid #cccccc; 
+    margin-left: 5px;
+}
+#tabla-consulta 
+{
+    width: 100%;
+    max-width: 600px;
+    border-collapse: collapse;
+    margin: 10px;
+}
+#tabla-consulta thead th 
+{
+    text-align: center;
+}
+#tabla-consulta th, #tabla-consulta td 
+{
+    border: 0.1px solid #000000;
+    padding-left: 5px;
+    padding-right: 5px;
+    padding-top: 1.5px;
+    padding-bottom: 1.5px;
+    text-transform: uppercase;
+}
+#tabla-consulta th:nth-child(1), td:nth-child(1) 
+{
+    width: 70px;
+}
+#tabla-consulta td:nth-child(1) 
+{
+    text-align: center;
+}
+#tabla-consulta th:nth-child(2), td:nth-child(2) 
+{
+    min-width: 110px;
+}
+#tabla-consulta td:nth-child(2) 
+{
+    text-align: left;
+}
+#tabla-consulta th:nth-child(3), td:nth-child(3) 
+{
+    width: 40px;
+}
+#tabla-consulta td:nth-child(3) 
+{
+    text-align: center;
+}
+.agregar 
+{
+    cursor: pointer;
+    background: none;
+    border: none;
+    padding: 2px;
+}
+.agregar i 
+{
+    font-size: 14px;
+}
+/* OCULTAR */
+#box-defecto 
+{
+    display: none;
+}
+#encabezado-pdf
+{
+    display: none;
+}
+.col-5
+{
+    display: none;    
+}
+#modal
+{    
+    display: none;
+}
