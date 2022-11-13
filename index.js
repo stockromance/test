@@ -153,6 +153,7 @@ cantidad.addEventListener('input', function()
 codigo.addEventListener('keydown', function(e)
 {
     var key = e.keyCode;
+    alert(key);
 
     if(key == 13) 
     {
