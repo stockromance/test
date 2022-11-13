@@ -548,11 +548,13 @@ m2Codigo.addEventListener('keydown', function(e)
     if(key == 13) 
     {
         //tecla enter
+        alert('enter');
         m2BuscarItem();
     }
     else if(key == 9) 
     {
         //tecla tab
+        alert('tab');
         e.preventDefault();
         m2BuscarItem();
     }
