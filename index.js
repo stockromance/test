@@ -152,56 +152,24 @@ cantidad.addEventListener('input', function()
 });
 codigo.addEventListener('keydown', function(e)
 {
-    var key = e.keyCode;
-    alert(key);
+    var key = e.keyCode; 
 
     if(key == 13) 
     {
         //tecla enter
-        if(codigo.value.length == 5)
-        {
-            if(itemExiste(codigo.value))
-            {
-                nombre.value = itemNombre(codigo.value);        
-                nombre.disabled = true;                   
-                cantidad.focus();
-            }
-            else
-            {
-                nombre.disabled = false;
-                nombre.focus(); 
-            }
-        }
-        else
-        {
-            //..
-        }      
+        alert('enter');
     }
     else if(key == 9) 
     {
         //tecla tab
         e.preventDefault();
-
-        if(codigo.value.length == 5)
-        {
-            if(itemExiste(codigo.value))
-            {
-                nombre.value = itemNombre(codigo.value);        
-                nombre.disabled = true;                   
-                cantidad.focus();
-            }
-            else
-            {
-                nombre.disabled = false;
-                nombre.focus(); 
-            }
-        }
+        alert('tab');
     }
     else if((key >= 48 && key <= 57) || (key >= 96 && key <= 105))
     {
-        //numeros: teclado y teclado numerico        
+        //numeros: teclado y teclado numerico   
     }    
-    else if(key == 37 || key == 39 || key == 8 || key == 46)
+    else if(key == 37 || key == 39 || key == 8 || key == 46 || key == 9)
     {
         //izquierda, derecha, suprimir, borrar, tab
     }
