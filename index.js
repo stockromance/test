@@ -132,12 +132,12 @@ function siguienteFocus()
 }
 codigo.addEventListener('input', function()
 {
-    if(codigo.value.length < 5)
+    /*if(codigo.value.length < 5)
     {
         nombre.disabled = true;
         nombre.value = '';
         cantidad.value = '';
-    }
+    }*/
     if(codigo.value.length > 5)
     {
         codigo.value = codigo.value.substring(0,5);
