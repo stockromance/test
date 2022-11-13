@@ -156,9 +156,79 @@ codigo.addEventListener('input', function()
         }
     } 
 });
+codigo.addEventListener('keydown', function(e)
+{
+    var key = e.keyCode; 
+    console.log(key);
 
-
-
+    if(key == 13) 
+    {
+        siguienteFocus();
+    }
+    else if(key == 9) 
+    {
+        //tecla tab
+        e.preventDefault();
+        siguienteFocus();
+    }
+    else if((key >= 48 && key <= 57) || (key >= 96 && key <= 105))
+    {
+        //numeros: teclado y teclado numerico   
+    }    
+    else if(key == 37 || key == 39 || key == 8 || key == 46 || key == 9)
+    {
+        //izquierda, derecha, suprimir, borrar, tab
+    }
+    else
+    {        
+        e.preventDefault();
+    }
+});
+//NOMBRE
+nombre.addEventListener('keydown', function(e)
+{  
+    var code = e.keyCode;
+    
+    if (code == 13) //tecla enter
+    {
+        if(nombre.value != '') 
+        { 
+            siguienteFocus();
+        }     
+    }
+});
+//CANTIDAD
+cantidad.addEventListener('input', function()
+{   
+    if(cantidad.value.length > 3)
+    {
+        cantidad.value = cantidad.value.substring(0,3);
+    } 
+});
+cantidad.addEventListener('keydown', function(e)
+{
+    var key = e.keyCode;
+    
+    if(key == 13) //tecla enter
+    {
+        if(cantidad.value != '')
+        {
+            siguienteFocus();
+        }
+    }     
+    else if((key >= 48 && key <= 57) || (key >= 96 && key <= 105))
+    {
+        //numeros: teclado y teclado numerico   
+    }    
+    else if(key == 37 || key == 39 || key == 8 || key == 46 || key == 9)
+    {
+        //izquierda, derecha, suprimir, borrar, tab
+    }
+    else
+    {
+        e.preventDefault();
+    }
+});
 
 //////////////////////////////////
 //SUMAR ITEMS
