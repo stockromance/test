@@ -163,6 +163,7 @@ codigo.addEventListener('keydown', function(e)
 
     if(key == 13) 
     {
+        //tecla enter
         siguienteFocus();
     }
     else if(key == 9) 
@@ -175,7 +176,7 @@ codigo.addEventListener('keydown', function(e)
     {
         //numeros: teclado y teclado numerico   
     }    
-    else if(key == 37 || key == 39 || key == 8 || key == 46 || key == 9)
+    else if(key == 37 || key == 39 || key == 8 || key == 46)
     {
         //izquierda, derecha, suprimir, borrar, tab
     }
@@ -524,6 +525,7 @@ function m2BuscarItem()
         m2Codigo.value='';
         m2Nombre.value='';
         alert('ERROR LECTURA CODIGO');
+        m2Codigo.focus();
     }
 }
 m2Codigo.addEventListener('input', function()
@@ -556,7 +558,7 @@ m2Codigo.addEventListener('keydown', function(e)
     {
         //numeros: teclado y teclado numerico   
     }    
-    else if(key == 37 || key == 39 || key == 8 || key == 46 || key == 9)
+    else if(key == 37 || key == 39 || key == 8 || key == 46)
     {
         //izquierda, derecha, suprimir, borrar, tab
     }
